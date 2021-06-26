@@ -25,6 +25,7 @@ class MovieActivity : AppCompatActivity() {
 
         movieViewModel.getMovie().observe(this, Observer {
             movieAdapter.setMovies(it)
+            movieAdapter.notifyDataSetChanged()
         })
 
         with(binding.rvMovie){

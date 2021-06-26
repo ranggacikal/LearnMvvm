@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = MainViewModel(CalculateModel())
 
         binding.btnCalculate.setOnClickListener{
             val height = binding.edtHeight.text.toString()
@@ -31,13 +31,9 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            viewModel.calculate(width, height, length)
-
+            viewModel.save(width.toDouble(), height.toDouble(), length.toDouble())
+            binding.tvResult.text = viewModel.getVolume().toString()
         }
-
-        viewModel.getResult().observe(this, Observer {
-            binding.tvResult.text = it.toString()
-        })
 
     }
 }

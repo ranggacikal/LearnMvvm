@@ -4,19 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val calculateModel: CalculateModel) : ViewModel() {
 
-    private var result = MutableLiveData<Int>()
-
-    fun calculate(width: String, height: String, length: String){
-
-        val calculate = width.toInt() * height.toInt() * length.toInt()
-        result.postValue(calculate)
-
+    fun save(l: Double, w: Double, h: Double) {
+        calculateModel.save(l, w, h)
     }
 
-    fun getResult() : LiveData<Int>{
-        return result
-    }
+    fun getVolume(): Double = calculateModel.getVolume()
 
 }
